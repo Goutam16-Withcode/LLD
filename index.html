@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document Editor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #f8f9fa, #e9ecef);
+      padding: 30px;
+      color: #343a40;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #212529;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section {
+      margin-bottom: 25px;
+    }
+
+    .section label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ced4da;
+      border-radius: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: #4c6ef5;
+      color: white;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background: #3b5bdb;
+    }
+
+    .output {
+      background: #f1f3f5;
+      padding: 20px;
+      border-radius: 10px;
+      min-height: 150px;
+      font-size: 16px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>📄 Modern Document Editor</h1>
+
+    <div class="section">
+      <label for="textInput">Add Text:</label>
+      <input type="text" id="textInput" placeholder="Enter some text...">
+      <button onclick="addText()">Add Text</button>
+    </div>
+
+    <div class="section">
+      <label for="imageInput">Add Image (Path):</label>
+      <input type="text" id="imageInput" placeholder="e.g., image.jpg">
+      <button onclick="addImage()">Add Image</button>
+    </div>
+
+    <div class="section">
+      <button onclick="addNewLine()">➕ New Line</button>
+      <button onclick="addTabSpace()">➕ Tab Space</button>
+      <button onclick="renderDocument()">🖨️ Render</button>
+    </div>
+
+    <div class="section">
+      <label>📄 Rendered Document:</label>
+      <div class="output" id="output"></div>
+    </div>
+  </div>
+
+  <script>
+    let docElements = [];
+
+    function addText() {
+      const text = document.getElementById('textInput').value;
+      if (text.trim() !== '') {
+        docElements.push(text);
+        document.getElementById('textInput').value = '';
+      }
+    }
+
+    function addImage() {
+      const path = document.getElementById('imageInput').value;
+      if (path.trim() !== '') {
+        docElements.push(`[Image: ${path}]`);
+        document.getElementById('imageInput').value = '';
+      }
+    }
+
+    function addNewLine() {
+      docElements.push('\n');
+    }
+
+    function addTabSpace() {
+      docElements.push('\t');
+    }
+
+    function renderDocument() {
+      const output = docElements.join('');
+      document.getElementById('output').innerText = output;
+    }
+  </script>
+</body>
+
+</html>
